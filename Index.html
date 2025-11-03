@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AF1-ACES-IOS</title>
+  <title>AF1 ANDRO-IOS</title>
   <style>
     body {
       margin: 0;
@@ -28,6 +28,24 @@
     header h1 {
       font-size: 28px;
       color: #ff0055;
+    }
+
+    .search-box {
+      margin: 20px;
+      text-align: center;
+    }
+
+    .search-box input {
+      width: 90%;
+      max-width: 400px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      background: #1a1a1a;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(255,0,85,0.3);
     }
 
     .container {
@@ -85,16 +103,24 @@
       background: #fff;
       color: #000;
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="https://i.ibb.co/hFYPWbpJ/plus.png" alt="Logo AF1">
-    <h1>AF1-ACES-IOS</h1>
+    <img src="https://i.ibb.co/hFYPWbpJ/plus.png" alt="Logo Nueva Era">
+    <h1>Nueva AF1 ANDRO-IOS</h1>
   </header>
 
-  <div class="container">
+  <div class="search-box">
+    <input type="text" id="buscador" placeholder="Buscar canal, grupo o logo...">
+  </div>
+
+  <div class="container" id="container">
     <!-- AMC HD -->
     <div class="channel-card">
       <img src="https://github.com/davidmuma/picons_dobleM/blob/master/icon/AMC%20HD.png?raw=true" alt="AMC HD">
@@ -360,5 +386,19 @@
     </div>
 
   </div> <!-- cierre container -->
+  <script>
+  const input = document.getElementById('buscador');
+  const cards = document.querySelectorAll('.channel-card');
+
+  input.addEventListener('input', () => {
+    const term = input.value.toLowerCase();
+    cards.forEach(card => {
+      const texto = card.textContent.toLowerCase();
+      const alt = card.querySelector('img').alt.toLowerCase();
+      const coincide = texto.includes(term) || alt.includes(term);
+      card.classList.toggle('hidden', !coincide);
+    });
+  });
+</script>
 </body>
 </html>
